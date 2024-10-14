@@ -4,25 +4,27 @@
 
 replicaCount: 1
 
-image:
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+backend:
+  image:
   repository: ""
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
+  env:
+  secrets:
 
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
-###########################################################
-## place values here the will be passed to the container###
-###########################################################
-env:
-
-########################################################################
-###place secrets here they will be mounted as secret to the container###
-########################################################Webseize################
-secrets:
-  
+frontend:
+  image:
+  repository: ""
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+  env:
+  secrets:
 
 serviceAccount:
   # Specifies whether a service account should be created
