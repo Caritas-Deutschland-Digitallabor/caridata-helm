@@ -35,22 +35,21 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
            - configMapRef:
-              name: {{ printf "env-%s" .Release.Name }}
+              name: {{ printf "env-backend-%s" .Release.Name }}
            - secretRef:
-              name: {{ printf "secrets-%s" .Release.Name  }}
+              name: {{ printf "secrets-backend-%s" .Release.Name  }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: 8000
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /
-              port: {{ .Values.service.port }}
+              port: 8000
           readinessProbe:
             httpGet:
               path: /
-              port: {{ .Values.service.port }}
-          resources:
+              port: 8000
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
