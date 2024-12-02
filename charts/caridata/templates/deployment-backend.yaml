@@ -28,8 +28,8 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: {{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}
-          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          image: {{ .Values.backend.image }}
+          imagePullPolicy: {{ .Values.backend.pullPolicy }}
           envFrom:
            - secretRef:
               name: {{ printf "secrets-backend%s" .Release.Name  }}

@@ -9,11 +9,9 @@ nameOverride: ""
 fullnameOverride: ""
 
 backend:
-  image:
-    repository: ""
-    pullPolicy: IfNotPresent
+  image: ""
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-    tag: ""
   existingSecret: ""
   secrets:
     API_ENVIRONMENT__ENVIRONMENT: ""
@@ -44,10 +42,7 @@ backend:
 
 frontend:
   image:
-    repository: ""
-    pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-    tag: ""
+  pullPolicy: IfNotPresent
 
 serviceAccount:
   # Specifies whether a service account should be created
