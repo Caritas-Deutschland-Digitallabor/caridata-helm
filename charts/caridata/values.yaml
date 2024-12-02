@@ -10,46 +10,44 @@ fullnameOverride: ""
 
 backend:
   image:
-  repository: ""
-  pullPolicy: IfNotPresent
+    repository: ""
+    pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
-  env:
+    tag: ""
+  existingSecret: ""
   secrets:
-    API_ENVIRONMENT__ENVIRONMENT: 
-    API_SCALEWAY__PROJECT_ID: 
-    API_SCALEWAY__API_TOKEN: 
-    API_DATABASE__HOST: 
-    API_DATABASE__USER: 
-    API_DATABASE__PASSWORD: 
-    API_DATABASE__DATABASE: 
-    API_AUTH__RESET_PASSWORD_TOKEN_SECRET: 
-    API_AUTH__VERIFICATION_TOKEN_SECRET: 
-    API_AUTH__COOKIE_SECURE: 
-    API_CORS__ALLOW_ORIGINS: 
-    API_CORS__ALLOW_CREDENTIALS: 
-    API_CSRF__SECRET: 
-    API_CSRF__COOKIE_NAME: 
-    API_CSRF__COOKIE_SECURE: 
-    API_CSRF__HEADER_NAME: 
-    API_EMAIL__SENDER: 
-    API_EMAIL__DOMAIN: 
-    API_EMAIL__DOMAIN_FORGOT_PWD_SUFFIX: 
-    API_EMAIL__DOMAIN_INVITE_PWD_SUFFIX: 
-    API_EMAIL__DOMAIN_WELCOME_VERIFY_SUFFIX: 
-    API_CARITAS__API_URI: 
-    API_CARITAS__API_CATEGORY: 
-    API_CARITAS__API_BASIC_AUTH_USERNAME: 
-    API_CARITAS__API_BASIC_AUTH_PASSWORD: 
+    API_ENVIRONMENT__ENVIRONMENT: ""
+    API_SCALEWAY__PROJECT_ID: ""
+    API_SCALEWAY__API_TOKEN: ""
+    API_DATABASE__HOST: ""
+    API_DATABASE__USER: ""
+    API_DATABASE__PASSWORD: ""
+    API_DATABASE__DATABASE: ""
+    API_AUTH__RESET_PASSWORD_TOKEN_SECRET: ""
+    API_AUTH__VERIFICATION_TOKEN_SECRET: ""
+    API_AUTH__COOKIE_SECURE: ""
+    API_CORS__ALLOW_ORIGINS: ""
+    API_CORS__ALLOW_CREDENTIALS: ""
+    API_CSRF__SECRET: ""
+    API_CSRF__COOKIE_NAME: ""
+    API_CSRF__COOKIE_SECURE: ""
+    API_CSRF__HEADER_NAME: ""
+    API_EMAIL__SENDER: ""
+    API_EMAIL__DOMAIN: ""
+    API_EMAIL__DOMAIN_FORGOT_PWD_SUFFIX: ""
+    API_EMAIL__DOMAIN_INVITE_PWD_SUFFIX: ""
+    API_EMAIL__DOMAIN_WELCOME_VERIFY_SUFFIX: ""
+    API_CARITAS__API_URI: ""
+    API_CARITAS__API_CATEGORY: ""
+    API_CARITAS__API_BASIC_AUTH_USERNAME: ""
+    API_CARITAS__API_BASIC_AUTH_PASSWORD: ""
 
 frontend:
   image:
-  repository: ""
-  pullPolicy: IfNotPresent
+    repository: ""
+    pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
-  env:
-  secrets:
+    tag: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -105,12 +103,7 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+
 nodeSelector: {}
 
 tolerations: []
