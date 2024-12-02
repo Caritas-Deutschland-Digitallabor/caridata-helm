@@ -27,7 +27,7 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ .Values.frontend.image }}
-          imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.frontend.pullPolicy }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
