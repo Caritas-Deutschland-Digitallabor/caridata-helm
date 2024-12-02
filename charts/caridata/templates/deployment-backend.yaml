@@ -1,13 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "common.fullname" . }}
+  name: {{ printf "backend-%s" .Release.Name  }}
   labels:
     {{- include "common.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.backend.iautoscaling.enabled }}
-  replicas: {{ .Values.backend.ireplicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "common.selectorLabels" . | nindent 6 }}
@@ -31,13 +28,11 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.iimage.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           envFrom:
-           - configMapRef:
-              name: {{ printf "env-backend-%s" .Release.Name }}
            - secretRef:
-              name: {{ printf "secrets-backend-%s" .Release.Name  }}
+              name: {{ printf "secrets-backend%s" .Release.Name  }}
           ports:
             - name: http
               containerPort: 8000
@@ -45,11 +40,12 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: 8000
+              port: {{ .Values.service.port }}
           readinessProbe:
             httpGet:
               path: /
-              port: 8000
+              port: {{ .Values.service.port }}
+          resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
