@@ -4,12 +4,12 @@ metadata:
   name: {{ printf "backend-%s" .Release.Name  }}
   labels:
     {{- include "common.labels" . | nindent 4 }}
-    servicetype: backend
+    tier: backend
 spec:
   selector:
     matchLabels:
       {{- include "common.selectorLabels" . | nindent 6 }}
-      servicetype: backend
+      tier: backend
   template:
     metadata:
       {{- with .Values.podAnnotations }}
