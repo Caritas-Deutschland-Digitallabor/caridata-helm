@@ -3,6 +3,16 @@ entries:
   caridata:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-12-03T10:54:51.392298956Z"
+    description: A Helm chart for Caridata
+    digest: bdc833ad7db5fe9ea436242234a30eeba98be9e478af607ad53e6bf4c27713a7
+    name: caridata
+    type: application
+    urls:
+    - https://github.com/Caritas-Deutschland-Digitallabor/caridata-helm/releases/download/caridata-0.1.7/caridata-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-12-02T14:59:10.001087955Z"
     description: A Helm chart for Caridata
     digest: 49cc8eb57f16f4fd8bc623baa0dab751ad42bc15d1291a59451dc62fabc04cb2
@@ -61,4 +71,4 @@ entries:
     urls:
     - https://github.com/Caritas-Deutschland-Digitallabor/caridata-helm/releases/download/caridata-0.1.1/caridata-0.1.1.tgz
     version: 0.1.1
-generated: "2024-12-02T14:59:10.001111649Z"
+generated: "2024-12-03T10:54:51.392379285Z"
