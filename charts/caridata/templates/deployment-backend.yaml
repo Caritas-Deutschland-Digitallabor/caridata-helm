@@ -9,7 +9,6 @@ spec:
   selector:
     matchLabels:
       {{- include "common.selectorLabels" . | nindent 6 }}
-      tier: backend
   template:
     metadata:
       {{- with .Values.podAnnotations }}

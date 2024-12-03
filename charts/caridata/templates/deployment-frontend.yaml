@@ -10,7 +10,6 @@ spec:
   selector:
     matchLabels:
       {{- include "common.selectorLabels" . | nindent 6 }}
-      tier: frontend
   template:
     metadata:
       {{- with .Values.podAnnotations }}
