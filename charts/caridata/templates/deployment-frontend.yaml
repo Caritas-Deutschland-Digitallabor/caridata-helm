@@ -4,11 +4,13 @@ metadata:
   name: {{ printf "frontend-%s" .Release.Name  }}
   labels:
     {{- include "common.labels" . | nindent 4 }}
+    servicetype: frontend
 spec:
   replicas: {{ .Values.frontend.replicaCount }}
   selector:
     matchLabels:
       {{- include "common.selectorLabels" . | nindent 6 }}
+      servicetype: frontend
   template:
     metadata:
       {{- with .Values.podAnnotations }}
