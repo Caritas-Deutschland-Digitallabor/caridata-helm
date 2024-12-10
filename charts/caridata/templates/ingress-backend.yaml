@@ -3,11 +3,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ $fullName }}
+  name: {{ $fullName }}-backend
   labels:
     {{- include "common.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
@@ -28,18 +29,11 @@ spec:
     - host: {{ .Values.ingress.host }}
       http:
         paths:
-          - path: /
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: {{ $fullName }}-frontend
-                port:
-                  number: 80
-          - path: /api
+          - path: /api(/|$)(.*)
             pathType: Prefix
             backend:
               service:
                 name: {{ $fullName }}-backend
                 port:
-                  number: 80
+                  number: 8000
     {{- end }}
