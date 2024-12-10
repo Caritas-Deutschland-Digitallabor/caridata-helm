@@ -16,6 +16,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
+        tier: backend
         {{- include "common.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
@@ -30,6 +31,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ .Values.backend.image }}
           imagePullPolicy: {{ .Values.backend.pullPolicy }}
+          command: ["gunicorn", "api:app", "--workers=2", "--worker-class=uvicorn.workers.UvicornWorker", "--bind=0.0.0.0:8000", "--access-logfile", "-", ]
           envFrom:
            - secretRef:
               name: {{ printf "secrets-backend%s" .Release.Name  }}
@@ -39,11 +41,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /docs
               port: 8000
           readinessProbe:
             httpGet:
-              path: /
+              path: /docs
               port: 8000
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
