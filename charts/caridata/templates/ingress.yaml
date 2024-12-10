@@ -31,19 +31,18 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    {{- range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
+    - host: {{ .Values.ingress.host }}
       http:
         paths:
-          - path: {{ .path }}
-            pathType: {{ .pathType }}
+          - path: /
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: {{ $fullName }}-frontend
                 port:
                   number: 80
-          - path: {{ .path }}
-            pathType: {{ .pathType }}
+          - path: /api
+            pathType: Prefix
             backend:
               service:
                 name: {{ $fullName }}-backend
