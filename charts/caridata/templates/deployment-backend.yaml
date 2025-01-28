@@ -31,7 +31,16 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ .Values.backend.image }}
           imagePullPolicy: {{ .Values.backend.pullPolicy }}
-          command: ["gunicorn", "api:app", "--workers=2", "--worker-class=uvicorn.workers.UvicornWorker", "--bind=0.0.0.0:8000", "--access-logfile", "-", ]
+          command: 
+          - uvicorn
+          - api:app
+          - '--workers'
+          - '2'
+          - '--host'
+          - 0.0.0.0
+          - '--port'
+          - '8000'
+          - '--access-log'
           envFrom:
            - secretRef:
               name: {{ printf "secrets-backend%s" .Release.Name  }}
