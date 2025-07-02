@@ -21,3 +21,8 @@
 .idea/
 *.tmproj
 .vscode/
+# Additional patterns
+test/
+docs/
+*.log
+*.cache
