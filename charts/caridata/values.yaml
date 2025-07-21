@@ -43,6 +43,9 @@ backend:
 frontend:
   image:
   pullPolicy: IfNotPresent
+  ENV:
+    VITE_BASE_URL: "/uploads"
+    VITE_API_BASE_URL: "uploads/api"
 
 serviceAccount:
   # Specifies whether a service account should be created
