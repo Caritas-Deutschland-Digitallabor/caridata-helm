@@ -47,3 +47,11 @@ the `backend.migrations` values. By default the init container reuses the backen
 pull policy, but you can provide overrides for the command, arguments, environment variables
 or container resources when needed. Disable the init container entirely by setting
 `backend.migrations.enabled` to `false`.
+
+### Backend secrets
+
+Populate the `backend.secrets` map with the environment variables that should be exposed to
+the application. When Helm manages the Kubernetes secret, the chart now honours the
+`backend.secretName` value verbatim, ensuring no prefixes or suffixes are added. Set
+`backend.existingSecret` instead when you want to reference a pre-existing secret and skip
+rendering a new one.
