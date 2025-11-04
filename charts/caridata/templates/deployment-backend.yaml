@@ -26,6 +26,47 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- $backendValues := .Values.backend }}
+      {{- $migrations := $backendValues.migrations }}
+      {{- $migrationsEnabled := true }}
+      {{- if and $migrations (hasKey $migrations "enabled") }}
+      {{- $migrationsEnabled = $migrations.enabled }}
+      {{- end }}
+      {{- if and $migrations $migrationsEnabled }}
+      initContainers:
+        - name: {{ default "alembic-migrate" $migrations.name }}
+          image: {{ default $backendValues.image $migrations.image }}
+          {{- with (default $backendValues.pullPolicy $migrations.pullPolicy) }}
+          imagePullPolicy: {{ . }}
+          {{- end }}
+          {{- with $migrations.command }}
+          command:
+            {{- toYaml . | nindent 12 }}
+          {{- else }}
+          command:
+            - alembic
+            - upgrade
+            - head
+          {{- end }}
+          {{- with $migrations.args }}
+          args:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          envFrom:
+            - secretRef:
+                name: {{ printf "secrets-backend%s" .Release.Name  }}
+            {{- with $migrations.extraEnvFrom }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          {{- with $migrations.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with $migrations.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
