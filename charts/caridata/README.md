@@ -38,3 +38,12 @@ frontend:
       cpu: 400m
       memory: 512Mi
 ```
+
+### Database migrations
+
+The backend deployment runs database migrations before starting the application by using an
+init container that executes `alembic upgrade head`. You can customise the behaviour through
+the `backend.migrations` values. By default the init container reuses the backend image and
+pull policy, but you can provide overrides for the command, arguments, environment variables
+or container resources when needed. Disable the init container entirely by setting
+`backend.migrations.enabled` to `false`.
