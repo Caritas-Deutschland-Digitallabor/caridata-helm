@@ -13,6 +13,7 @@ backend:
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   existingSecret: ""
+  secretName: ""
   migrations:
     enabled: true
     name: alembic-migrate

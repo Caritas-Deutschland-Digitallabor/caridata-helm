@@ -1,3 +1,4 @@
+{{- $backendSecretName := .Values.backend.existingSecret | default (.Values.backend.secretName | default .Release.Name) }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -54,7 +55,7 @@ spec:
           {{- end }}
           envFrom:
             - secretRef:
-                name: {{ printf "secrets-backend%s" .Release.Name  }}
+                name: {{ $backendSecretName }}
             {{- with $migrations.extraEnvFrom }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
@@ -85,7 +86,7 @@ spec:
           - '--access-log'
           envFrom:
             - secretRef:
-                name: {{ default (printf "secrets-backend%s" .Release.Name) .Values.backend.existingSecret }}
+                name: {{ $backendSecretName }}
           ports:
             - name: http
               containerPort: 8000
