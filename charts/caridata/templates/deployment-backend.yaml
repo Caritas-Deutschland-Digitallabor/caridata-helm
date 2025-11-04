@@ -47,7 +47,7 @@ spec:
           command:
             - alembic
             - upgrade
-            - head
+            - heads
           {{- end }}
           {{- with $migrations.args }}
           args:
