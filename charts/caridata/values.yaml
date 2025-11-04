@@ -13,6 +13,13 @@ backend:
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   existingSecret: ""
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
   secrets:
     API_ENVIRONMENT__ENVIRONMENT: ""
     API_SCALEWAY__PROJECT_ID: ""
@@ -41,8 +48,16 @@ backend:
     API_CARITAS__API_BASIC_AUTH_PASSWORD: ""
 
 frontend:
+  replicaCount: 1
   image:
   pullPolicy: IfNotPresent
+  resources:
+    limits:
+      cpu: 300m
+      memory: 256Mi
+    requests:
+      cpu: 150m
+      memory: 128Mi
   ENV:
     VITE_BASE_URL: "/uploads"
     VITE_API_BASE_URL: "uploads/api"
@@ -84,14 +99,6 @@ ingress:
   #  - secretName: chart-example-tls
 #    hosts:
         #      - chart-example.local
-
-resources:
-  limits:
-    cpu: 500m
-    memory: 512Mi
-  requests:
-    cpu: 250m
-    memory: 256Mi
 
 nodeSelector: {}
 

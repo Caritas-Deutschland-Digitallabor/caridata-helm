@@ -56,8 +56,10 @@ spec:
             httpGet:
               path: /docs
               port: 8000
+          {{- with .Values.backend.resources }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
