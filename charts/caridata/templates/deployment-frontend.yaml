@@ -6,7 +6,7 @@ metadata:
     {{- include "common.labels" . | nindent 4 }}
     tier: frontend
 spec:
-  replicas: {{ .Values.frontend.replicaCount }}
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       {{- include "common.selectorLabels" . | nindent 6 }}
