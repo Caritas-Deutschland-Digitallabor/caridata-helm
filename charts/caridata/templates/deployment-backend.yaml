@@ -42,8 +42,8 @@ spec:
           - '8000'
           - '--access-log'
           envFrom:
-           - secretRef:
-              name: {{ printf "secrets-backend%s" .Release.Name  }}
+            - secretRef:
+                name: {{ default (printf "secrets-backend%s" .Release.Name) .Values.backend.existingSecret }}
           ports:
             - name: http
               containerPort: 8000
