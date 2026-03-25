@@ -111,6 +111,8 @@ ingress:
 #    hosts:
         #      - chart-example.local
 
+priorityClassName: ""
+
 nodeSelector: {}
 
 tolerations: []
